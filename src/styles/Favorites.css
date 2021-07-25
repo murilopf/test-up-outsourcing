@@ -1,0 +1,37 @@
+.fav-btns-favorite {
+    padding: 16px 20px;
+	border-radius: 25px;
+    border: none;
+    margin: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#fav-container {
+    display: flex;
+    align-items: center;
+    width: auto;
+    background-color: #FFF;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 24px 24px 24px 0;
+}
+
+#fav-name {
+    color: #000;
+    font-size: 24px;
+    font-weight: bold;
+    flex-grow: 2;
+}
+
+#fav-btn-detail {
+    color: #000;
+    background-color: yellow;
+}
+
+#fav-btn-remove {
+    color: #FFF;
+    background-color: rgb(219, 23, 23);
+}
+

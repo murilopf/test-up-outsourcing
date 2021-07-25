@@ -1,16 +1,26 @@
 table {
     margin-top: 24px;
-    background-color: aliceblue;
+    background-color: #fff;
     border-collapse: collapse;
+    border-color: #ffe300;
     width: 100%;
+    border-radius: 8px;
+}
+
+thead th {
+    background-color: #ffe300;
+    cursor: default;
 }
 
 td, th {
-    border: 1px solid #dddddd;
+    height: 30px;
+    /* border: 1px solid #dddddd; */
     text-align: left;
-    padding: 8px;
+    padding: 12px;
+    cursor: pointer;
+    font-size: 16px;
 }
   
-tr:nth-child(even) {
+/* tr:nth-child(even) {
     background-color: #dddddd;
-}
+} */

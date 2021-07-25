@@ -37,36 +37,41 @@ const CharactersTable: React.FC<Props> = ({ characters }) => {
 
     return (
         <table>
+
             {
                 characters && characters.length > 0 ?
                     <>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Idade</th>
-                            <th>Filmes</th>
-                        </tr>
-                        {
-                            characters.map((character) => (
-                                // <TableRow value={value}></TableRow>
-                                <tr onClick={() => handleDetailCharacter(character)} key={character.name}>
-                                    <td>{character.name}</td>
-                                    <td>{character.birth_year.replace(/\D/g, '')}</td>
-                                    <td>{character.films.length}</td>
-                                </tr>
-                            ))
-                        }
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Idade</th>
+                                <th>Filmes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                characters.map((character) => (
+                                    <tr onClick={() => handleDetailCharacter(character)} key={character.name}>
+                                        <td>{character.name}</td>
+                                        <td>{character.birth_year.replace(/\D/g, '')}</td>
+                                        <td>{character.films.length}</td>
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
                     </>
 
                     : <>
-                        <tr>
-                            <td>
-
-                                <span> Nenhum personagem encontrado</span>
-                            </td>
-                        </tr>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span> Nenhum personagem encontrado</span>
+                                </td>
+                            </tr>
+                        </tbody>
                     </>
             }
-        </table>
+        </table >
     )
 }
 

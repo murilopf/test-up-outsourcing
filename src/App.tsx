@@ -4,6 +4,7 @@ import Header from './components/Header';
 import SearchBar from './components/SearchBar';
 import Table from './components/characterTable/Table';
 import Favorites from './components/Favorites'
+import imgVader from './images/vader.png'
 
 const App: React.FC = () => {
 	const [control, setControl] = useState(true)
@@ -19,6 +20,7 @@ const App: React.FC = () => {
 	return (
 		<div id='container'>
 			<Header handleChangeBody={handleChangeBody}></Header>
+			<img id="app-logo-vader" src={imgVader} alt="" />
 			<div>
 				{
 					control ?

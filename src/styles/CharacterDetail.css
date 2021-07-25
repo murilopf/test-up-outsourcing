@@ -1,4 +1,55 @@
 .container {
-    background-color: aliceblue;
     width: 100%;
+    background-color: #fff;
+    margin-top: 24px;
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.detail-options {
+    padding: 16px 20px;
+	border-radius: 25px;
+    border: none;
+    margin: 16px 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#container-title {
+    display: flex;
+    justify-content: center;
+    /* text-align: center; */
+}
+
+#title {
+    flex-grow: 2;
+    color: #000;
+}
+
+#divider {
+    width: 100%;
+    height: 1px;
+    background-color: #ddd;
+    margin-top: 16px;
+}
+
+#btn-favorite {
+    background-color: #ffe300;
+    color: #000;
+    border: none;
+}
+
+#btn-cancel-favorite {
+    background-color: #FFF;
+    color: #000;
+    border: 1px solid;
+}
+
+h2 {
+    color: #000;
+}
+
+p {
+    color: #000;
 }

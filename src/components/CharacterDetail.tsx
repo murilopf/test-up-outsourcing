@@ -4,20 +4,49 @@ import { getMovieName } from '../services/api'
 
 interface Props {
     showDetail: any,
-    character?: any
+    character: any
+    showFavoriteButton?: boolean
 }
 
-const CharacterDetail: React.FC<Props> = ({ showDetail, character }) => {
+const CharacterDetail: React.FC<Props> = ({ showDetail, character, showFavoriteButton = true }) => {
 
-    const [loading, setLoading] = useState(false)
-    const [movies, setMovies] = useState<any>([])
+    // const [loading, setLoading] = useState(false)
+    // const [movies, setMovies] = useState<any>([])
 
     const handleBackToTable = () => {
         showDetail(false)
     }
 
     const handleFavoriteCharacter = () => {
-        console.log('Favotira o character')
+
+        if (localStorage.getItem('@up-outsourcing/favorites') === null) {
+
+            const favorites = [];
+            favorites.push(character)
+            localStorage.setItem('@up-outsourcing/favorites', JSON.stringify(favorites));
+
+        } else {
+
+            let exist = false
+            let favorites: any = localStorage.getItem('@up-outsourcing/favorites');
+            favorites = JSON.parse(favorites)
+
+            for (let i = 0; i < favorites.length; i += 1) {
+                if (favorites[i].name === character.name) {
+                    exist = true
+                    break;
+                }
+            }
+
+            if (!exist) {
+                favorites.push(character)
+                localStorage.setItem('@up-outsourcing/favorites', JSON.stringify(favorites));
+            } else {
+                console.log("Personagem já está salvo nos favoritos (:")
+            }
+
+        }
+        showDetail(false)
     }
 
     const getCharacterSex = (value: string) => {
@@ -42,32 +71,34 @@ const CharacterDetail: React.FC<Props> = ({ showDetail, character }) => {
     //     })
     // }, [])
 
-    if (loading)
-        return <h1>carregando</h1>
+    // if (loading)
+    //     return <h1>carregando</h1>
 
     if (!character)
         return <h1>error</h1>
 
-    console.log('o que nos movies? ', movies)
-
     return (
         <div className='container'>
-            <div>
-                <h1>{character.name}</h1>
-                <button type="button" onClick={handleBackToTable}> Cancelar </button>
-                <button type="button" onClick={handleFavoriteCharacter}> Favoritar </button>
+            <div id="container-title">
+                <h1 id="title">{character.name}</h1>
+                {
+                    showFavoriteButton ?
+                        <button id="btn-favorite" className='detail-options ' type="button" onClick={handleFavoriteCharacter}> Favoritar </button>
+                        : <></>
+                }
+                <button id="btn-cancel-favorite" className='detail-options ' type="button" onClick={handleBackToTable}> {showFavoriteButton ? 'Cancelar' : 'Voltar'} </button>
             </div>
 
-            <div> divider </div>
+            <div id="divider" />
 
             <div>
-                <h3>Infos</h3>
-                <span>{`Idade: ${character.birth_year.replace(/\D/g, '')}`}</span>
-                <span>{`Altura: ${character.height}cm`}</span>
-                <span>{`Peso: ${character.mass}kg`}</span>
-                <span>{`Sexo: ${getCharacterSex(character.gender)}`}</span>
+                <h2>Informações</h2>
+                <p>{`Idade: ${character.birth_year.replace(/\D/g, '')}`}</p>
+                <p>{`Altura: ${character.height}cm`}</p>
+                <p>{`Peso: ${character.mass}kg`}</p>
+                <p>{`Sexo: ${getCharacterSex(character.gender)}`}</p>
 
-                {/* <h3>Filmes</h3>
+                {/* <h2>Filmes</h2>
                 <div>
                     {
                         movies.length > 0 ?
