@@ -4,6 +4,6 @@
  - Instale as depedencias com `yarn` ou `npm`
  - Pronto, agora é só você executar o projeto no seu terminal com o comando:
 
-- ### `yarn start`
+- ### `yarn start` ou `npm start`
 
 #
