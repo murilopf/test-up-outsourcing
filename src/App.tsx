@@ -1,26 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import './styles/App.css';
+import Header from './components/Header';
+import SearchBar from './components/SearchBar';
+import Table from './components/characterTable/Table';
+import Favorites from './components/Favorites'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App: React.FC = () => {
+	const [control, setControl] = useState(true)
+	const [character, setCharacter] = useState([])
+
+	const handleChangeBody = (value: boolean) => {
+		if (control === value) return
+
+		setControl(value)
+	}
+
+
+	return (
+		<div id='container'>
+			<Header handleChangeBody={handleChangeBody}></Header>
+			<div>
+				{
+					control ?
+						<div>
+							<SearchBar setCharacter={setCharacter} />
+							{
+								character &&
+								<Table characters={character} />
+							}
+						</div>
+						:
+						<div>
+							{/* <SearchBar /> */}
+							<Favorites />
+						</div>
+				}
+			</div>
+		</div>
+	);
 }
 
 export default App;
