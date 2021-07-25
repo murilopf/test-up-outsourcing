@@ -52,7 +52,7 @@ const Favorites: React.FC = () => {
         return (
             <div>
                 <h1> Meus favoritos </h1>
-                <span> Você não possui nenhum personagem salvo na sua lista de favoritos </span>
+                <span id="fav-none-favorites"> Você não possui nenhum personagem salvo como favorito </span>
             </div>
         )
     }

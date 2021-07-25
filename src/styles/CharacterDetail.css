@@ -46,10 +46,21 @@
     border: 1px solid;
 }
 
+#loading{
+    font-size: 16px;
+    margin: 24px;
+    color: #FFF;
+}
+
 h2 {
     color: #000;
 }
 
 p {
     color: #000;
+}
+
+span {
+    display: block;
+    margin: 8px 8px 8px 0px;
 }

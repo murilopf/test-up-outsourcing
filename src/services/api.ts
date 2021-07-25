@@ -16,7 +16,8 @@ const getMovieName = async (url: string) => {
   
   const response = await axios.get(url)
   if (response.status === 200) {
-    return response.data.title
+    const date = new Date(response.data.release_date)
+    return `${date.getFullYear()} - ${response.data.title}`
   }
 
   return false

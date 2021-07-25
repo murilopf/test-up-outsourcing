@@ -10,8 +10,8 @@ interface Props {
 
 const CharacterDetail: React.FC<Props> = ({ showDetail, character, showFavoriteButton = true }) => {
 
-    // const [loading, setLoading] = useState(false)
-    // const [movies, setMovies] = useState<any>([])
+    const [loading, setLoading] = useState(true)
+    const [movies, setMovies] = useState<any>([])
 
     const handleBackToTable = () => {
         showDetail(false)
@@ -41,8 +41,6 @@ const CharacterDetail: React.FC<Props> = ({ showDetail, character, showFavoriteB
             if (!exist) {
                 favorites.push(character)
                 localStorage.setItem('@up-outsourcing/favorites', JSON.stringify(favorites));
-            } else {
-                console.log("Personagem já está salvo nos favoritos (:")
             }
 
         }
@@ -57,25 +55,27 @@ const CharacterDetail: React.FC<Props> = ({ showDetail, character, showFavoriteB
         return 'Outro'
     }
 
-    // const handleGetMoviesName = async (url: string) => {
-    //     const title = await getMovieName(url)
-    //     return title
-    // }
+    const getCharacter = async (url: string) => {
+        const res = await getMovieName(url)
+        const arrayMovies = movies
+        arrayMovies.push(res)
+        setMovies(arrayMovies)
+        return res;
+    };
 
-    // useEffect(() => {
-    //     character.films.map(async (movie: string) => {
-    //         const res = await handleGetMoviesName(movie)
-    //         console.log('Só testando >> ', [...movies, res])
-    //         setMovies([...movies, res]);
-    //         return res
-    //     })
-    // }, [])
+    useEffect(() => {
 
-    // if (loading)
-    //     return <h1>carregando</h1>
+        Promise.all(character.films.map((url: string) => getCharacter(url))).then((value) => {
+            setLoading(false)
+        })
 
-    if (!character)
-        return <h1>error</h1>
+    }, [])
+
+    // Por ser rapido deixei sem um load
+    if (loading)
+        return (
+            <></>
+        )
 
     return (
         <div className='container'>
@@ -93,21 +93,21 @@ const CharacterDetail: React.FC<Props> = ({ showDetail, character, showFavoriteB
 
             <div>
                 <h2>Informações</h2>
-                <p>{`Idade: ${character.birth_year.replace(/\D/g, '')}`}</p>
-                <p>{`Altura: ${character.height}cm`}</p>
-                <p>{`Peso: ${character.mass}kg`}</p>
-                <p>{`Sexo: ${getCharacterSex(character.gender)}`}</p>
+                <span>{`Idade: ${character.birth_year.replace(/\D/g, '')}`}</span>
+                <span>{`Altura: ${character.height}cm`}</span>
+                <span>{`Peso: ${character.mass}kg`}</span>
+                <span>{`Sexo: ${getCharacterSex(character.gender)}`}</span>
 
-                {/* <h2>Filmes</h2>
+                <h2>Filmes</h2>
                 <div>
                     {
                         movies.length > 0 ?
                             movies.map((movie: string) => (
-                                <span style={{ display: 'block' }}>{movie}</span>
+                                <span key={movie} style={{ display: 'block' }}>{movie}</span>
                             ))
                             : <span>Não participou de nenhum filme</span>
                     }
-                </div> */}
+                </div>
             </div>
 
         </div>
